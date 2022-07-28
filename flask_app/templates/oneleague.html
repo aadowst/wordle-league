@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="/flask_app/static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>More Leagues</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="nav">
+            <div class="nav-links">
+                <span>Welcome, {{session.first_name}}</span><span><a href="/dashboard">Dashboard</a> <a
+                        href="/logout">Log Out</a></span>
+            </div>
+            <div class="header green">
+                <h1>{{one_league.name}}</h1>
+            </div>
+        </div>
+        <div class="body flex-row">
+
+            <div class="box">
+                <h3 class="yellow text-center"> Players</h3>
+                <ul>
+
+                    {% for player in one_league.players %}
+                    <li>{{player.first_name}} {{player.last_name}}</li>
+                    {% endfor %}
+                </ul>
+
+                INVITE MORE PLAYERS
+            </div>
+
+
+
+            <div class="box">
+                {% if matchups %}
+                <h3 class="green text-center"> Week  {{matchups[0].week}} Matchups</h3>
+                <ul>
+
+                    {% for matchup in matchups%}
+
+                    <li><a href="/matchups/{{matchup.matchup_id}}"> {{matchup.players[0].first_name}} {{matchup.players[0].last_name}} vs. {{matchup.players[1].first_name}} {{matchup.players[1].last_name}}</li>
+                    </a> 
+
+
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <span class="flex-row">
+                    {% if (matchups[0].week|int) > 1 %}<a href="{{(matchups[0].week|int)-1}}">Previous Week</a> {% endif %}
+                    {% if (matchups[0].week|int) < (one_league.length|int) %}<a href="{{(matchups[0].week|int)+1}}">Next Week</a> {% endif %}
+                </span>
+                {% if (matchups[0].week|int) == 1 %} <br><br><a href="../../createschedule/{{one_league.id}}"><p class="text-center"> CLICK HERE TO SCHEDULE MATCHUPS OR RESHUFFLE </p></a>  {% endif %}
+            </div>
+
+
+
+
+
+
+
+
+            <div class="box bg-dark text-bg-dark">
+                <h3 class="yellow text-center"> League Information</h3>
+
+                <form action="/oneleague/update" method="POST">
+                    <input type="hidden" name="id" value="{{one_league.id}}">
+                    <div class="row input-row">
+
+                        <label for="name">League Name:</label>
+                        <input type="text" name="name" value="{{one_league.name}}">
+                    </div>
+
+                    <div class="row input-row">
+
+                        <label for="length">Season Length:</label>
+                        <input type="number" name="length" value="{{one_league.length}}">
+                    </div>
+                    <div class="row input-row">
+
+                        <label for="capacity">Number of Players:</label>
+                        <input type="number" name="capacity" value="{{one_league.capacity}}">
+                    </div>
+                    <div class="row">
+
+                        <button type="submit" class="btn green w-25 mt-2" id="sub-btn">Update League</button>
+                    </div>
+                </form>
+                <!-- INSERT FLASH MESSAGES HERE -->
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
+</body>
+
+</html>

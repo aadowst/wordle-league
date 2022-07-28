@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Validation</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/July_11/static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+</head>
+<body>
+    <div class="container">
+
+<div class="alert">
+
+    {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+    {% if messages %}                            <!-- check if there are any messages -->
+        {% for message in messages %}            <!-- loop through the messages -->
+            <p class="invalid">{{message}}</p>                   <!-- display each message in a paragraph tag -->
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+<div class="box w-50">
+    <form action="/process" method="POST">
+    <div class="row justify-content-center"> 
+            <div class="col"> 
+                <label for="email">Email Address:  </label>
+            </div>
+            <div class="col justify-content-end">
+                <input type="text" name="email" id="email" class="input">
+            </div>
+        </div>
+        <div class="row justify-content-evenly">
+            <div class="d-flex flex-column w-25">
+
+            </div>
+            <div class="d-flex flex-column w-25 mt-2">
+                <button type="submit" class="" id="sub-btn">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+        
+            
+    </div>
+    
+    
+</body>
+</html>

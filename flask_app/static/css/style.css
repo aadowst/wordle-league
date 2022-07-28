@@ -1,0 +1,282 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    /* background-color: black; */
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.container {
+    background-color: black;
+    color: white;
+    height: 1000px;
+    margin: 0px;
+    padding: 2rem 2rem;
+}
+
+.nav {
+    background-color: black;
+    color: white;
+}
+
+a {
+    color: white;
+}
+
+.nav-links {
+    margin: 0px .5rem;
+
+    padding-top: 2px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.body {
+    padding: 4 em 2 em;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    grid-template-columns: minmax(1fr, 200px) minmax(400px, 4fr) minmax(1fr, 200px);
+    background-color: black;
+    font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.header {
+    margin: .5rem;
+    padding: 1rem;
+
+    text-align: center;
+}
+
+.sidebar {
+    width: 10%;
+    height: 300px;
+    text-align: center;
+    border: 2px solid white;
+
+    /* margin: .5rem; */
+    margin-top: .8rem;
+    padding: 5px;
+}
+
+
+.day {
+    /* margin-left: .1em; */
+    background-color: black;
+    color: white;
+    width: 7vw;
+    text-align: center;
+    /* background-color: white ; */
+}
+
+.day, .left {
+    border: 2px solid #3a3a3c;
+    /* margin: 5px; */
+    height: 7vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5vw;
+}
+.players-left {
+    border: 2px solid #3a3a3c;
+    /* margin: 5px; */
+    height: 7vw;
+    width: 14vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vw;
+}
+
+.day-number{
+    outline: 2px solid #3a3a3c;
+    /* margin: 5px; */
+    width: 7vw;
+    height: 7vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vw;
+}
+.score {
+    font-size: 3vw;
+}
+
+.left {
+    width: 14vw;
+}
+
+.main {
+    margin: .5rem;
+
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+@media screen and (max-width: 850px) {
+    .body {
+        padding: 2 em 1 em;
+    }
+
+    .sidebar,
+    .main {
+        width: 100%;
+        /* The width is 100%, when the viewport is 800px or smaller */
+        margin: 3px;
+    }
+
+    .sidebar {
+        height: 50px;
+        margin: 8px;
+    }
+
+
+    .day,
+    .left {
+
+        width: 9vw;
+        height: 9vw;
+
+    }
+
+    .left {
+        width: 18vw;
+    }
+}
+
+.row {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.input-row,
+.row-between {
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+.box {
+    background-color: #3a3a3c;
+    height: 50vh;
+    margin-top: 20px;
+    border: 2px solid white;
+    width: 20vw;
+
+}
+
+.box * {
+    padding: 5px;
+}
+
+.flex-row {
+    display: flex;
+    justify-content: space-around;
+}
+
+.text-center {
+    text-align: center;
+}
+
+ul {
+    margin-left: 20px;
+}
+
+.dashboard-table {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.green {
+    background-color: #528d4d;
+    color: white;
+}
+
+.yellow {
+    background-color: #b59f3a;
+    color: white;
+}
+
+.green-text {
+    color: #528d4d;
+}
+
+.yellow-text {
+    color: #b59f3a;
+}
+
+.grey-text {
+    color: #3a3a3c;;
+}
+
+.grey {
+    background-color: #3a3a3c;
+    color: white;
+}
+
+.flip-card {
+    background-color: black;
+    height: 7vw;
+    width: 7vw;
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flip-card-inner{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card.flip .flip-card-inner {
+    transform: rotateX(-180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    /* background-color: #bbb; */
+    color: black;
+}
+
+.flip-card-back {
+    /* background-color: #2980b9; */
+    color: white;
+    transform: rotateX(180deg);
+}
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="/flask_app/static/css/style.css">
+
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <div class="nav-links">
+                <span>Welcome, {{session.first_name}}</span><span><a href="/logout">Log Out</a></span>
+            </div>
+            <div class="header green">
+                <h1>Wordle League</h1>
+            </div>
+        </div>
+
+        <div class="body flex-row">
+            <div class="box">
+                <h3 class="text-center yellow-text">Leagues</h3>
+                <form action="/selectleague" class="row input-row" method="post">
+                    <label for="league_id">Select Your League:</label>
+                    <select name="league_id" onchange="form.submit()">
+                        <option value="test"></option>
+                        {% for league in my_leagues %}
+                        <option value="{{league.id}}">{{league.name}}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+                <div class="row input-row">
+
+                    <a href="/moreleagues">Join an Existing League</a>
+                    <a href="/moreleagues">Create a New League</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <h3 class="text-center green-text">My Stats</h3>
+                <ul>
+                    <li>Weeks Played</li>
+                    <li>Average Guesses</li>
+                    <li>Best Guess</li>
+                    <li>Total Wins</li>
+                    <li>Winning Percentage</li>
+                </ul>
+                
+
+            </div>
+
+            <div class="box">
+                <h3 class="text-center yellow-text">My Information</h3>
+                <table class="dashboard-table">
+                    <tr class="row-between">
+                        <td>First Name</td>
+                        <th>{{session.first_name}}</th>
+                    </tr>
+                    <tr class="row-between">
+                        <td>Last Name</td>
+                        <th>{{user_info.last_name}}</th>
+                    </tr>
+                    <tr class="row-between">
+                        <td>email</td>
+                        <th>{{user_info.email}}</th>
+                    </tr>
+                </table>
+                <a href="/updateuser">Update My Information</a>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

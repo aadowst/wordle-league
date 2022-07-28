@@ -1,0 +1,86 @@
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <link rel="stylesheet" href="/flask_app/static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Login and Registration</title>
+</head>
+<body>
+    <div class="container flex-row">
+        <div class="box">
+            <h3 class="green text-center">Register</h3>
+
+            <form action="/register" method="POST">
+                <div class="row input-row">
+
+                    <label for="first_name">First Name:</label>
+                    <input type="text" name="first_name" id="first_name">
+                </div>
+
+                <div class="row input-row">
+
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" name="last_name" id="last_name">
+                </div>
+
+                <div class="row input-row">
+
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="register_email">
+                </div>
+
+                <div class="row input-row">
+
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="register_password">
+                </div>
+
+                <div class="row input-row">
+
+                    <label for="confirm_password">Confirm Password:</label>
+                    <input type="password" name="confirm_password" id="confirm_password">
+                </div>
+                <div class="row">
+                    
+                    <button type="submit" class="btn yellow w-25 mt-2 mb-2" id="sub-btn">Submit</button>
+                </div>
+            </form>
+            <!-- INSERT FLASH MESSAGES HERE -->
+        </div>
+        
+        <div class="box bg-dark text-bg-dark">
+            <h3 class="yellow text-center">Login</h3>
+
+            <form action="/login" method="POST">
+                <div class="row input-row">
+
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="login_email">
+                </div>
+
+                <div class="row input-row">
+
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="login_password">
+                </div>
+
+
+                <div class="row">
+                    
+                    <button type="submit" class="btn green w-25 mt-2" id="sub-btn">Login</button>
+                </div>
+            </form>
+<!-- INSERT FLASH MESSAGES HERE -->
+        </div>
+        
+    </div>
+</body>
+</html>
+</body>
+</html>

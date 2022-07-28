@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="/flask_app/static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>More Leagues</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="nav">
+            <div class="nav-links">
+                <span>Welcome, {{session.first_name}}</span><span><a href="/dashboard">Dashboard</a>      <a
+                        href="/logout">Log Out</a></span>
+            </div>
+            <div class="header green">
+                <h1>Wordle League</h1>
+            </div>
+        </div>
+        <div class="body flex-row">
+
+            <div class="box">
+                <h3 class="green text-center"> Join a League</h3>
+
+                <form action="/joinleaguebyid" method="POST">
+                    <div class="row input-row">
+
+                        <label for="league_id">Enter League Id:</label>
+                        <input type="number" name="league_id">
+                    </div>
+                    <button type="submit" class="btn yellow w-25 mt-2 mb-2" id="sub-btn">Join by Id</button>
+                </form>
+                <form action="/joinleaguebyid" class="row input-row" method="POST">
+                    <div class="row input-row">
+                        <label for="league_id">Select a League:</label>
+                        <select name="league_id">
+                            {% if not_my_leagues %}
+                            {% for league in not_my_leagues %}
+                            <option value="{{league.id}}">{{league.name}}</option>
+                            {% endfor %}
+                            {% endif %}
+                        </select>
+                    </div>
+
+
+
+                    <button type="submit" class="btn yellow w-25 mt-2 mb-2" id="sub-btn">Join by Name</button>
+
+
+
+                </form>
+
+            </div>
+
+
+
+
+            <div class="box bg-dark text-bg-dark">
+                <h3 class="yellow text-center"> Create a New League</h3>
+
+                <form action="/createleague" method="POST">
+                    <div class="row input-row">
+
+                        <label for="name">League Name:</label>
+                        <input type="text" name="name">
+                    </div>
+                    <div class="row input-row">
+
+                        <label for="length">Season Length:</label>
+                        <input type="number" name="length">
+                    </div>
+                    <div class="row input-row">
+
+                        <label for="capacity">Number of Players:</label>
+                        <input type="number" name="capacity">
+                    </div>
+                    <div class="row">
+
+                        <button type="submit" class="btn green w-25 mt-2" id="sub-btn">Create New League</button>
+                    </div>
+                </form>
+                <!-- INSERT FLASH MESSAGES HERE -->
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
+</body>
+
+</html>

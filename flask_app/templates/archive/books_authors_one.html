@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Show</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="row d-flex flex-row m2">
+
+
+        <div class="col d-flex flex-column align-items-center">
+            <h2>{{favorites.name}}'s favorites</h2>
+
+
+            <div class="box w-50">
+                <table class="table table-striped table-bordered" id="my_table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th># of pages</th>
+    
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%  for book in favorites.favorite_books %}
+                        <tr>
+                            <td>{{book.title}}</td>
+                            <td>{{book.num_of_pages}}</td>
+    
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            
+            </div>
+            <a href="/authors" class="align-self-start mx-5">Home</a>
+        </div>
+            <div class="col d-flex flex-column align-items-center">
+                <h2>Add Author's Favorite</h2>
+                <div class="box w-50">
+                    <form action="/addfavorite" method="post" class="">
+                        <input type="hidden" name="author_id" value="{{author_id}}">
+                        <label for="book">Book:</label>
+    
+                <select name='book_id'>
+                    {% for book in not_favorites %}
+                    <option value='{{book.id}}'>{{book.title}}</option>
+                    {% endfor %}
+                </select>
+                        <input type="submit" value="Add" class="submit">
+                    </form>
+                </div>
+                
+                
+                
+                
+            </div>
+
+
+
+
+    </div>
+
+
+
+</body>
+</html>

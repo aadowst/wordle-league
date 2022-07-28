@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendships</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+</head>
+
+<body>
+
+    <div class="container d-flex">
+        <div class="col-6">
+            <div class="card my-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Friendships</h5>
+                    <table class="table table-striped table-bordered" id="my_table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Friend</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in all_friendships %}
+                            <tr>
+                                <td>{{row.first_name}} {{row.last_name}}</td>
+                                <td>{{row.friend.first_name}} {{row.friend.last_name}}</td>
+
+
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 d-flex flex-column">
+            <div class="card my-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Add User</h5>
+                    <form action="/adduser" method="post" class="">
+                        <label for="first_name">First Name:</label>
+                        <input type="text" name="first_name" class="form-control my-2">
+
+                        <label for="last_name">Last Name:</label>
+                        <input type="text" name="last_name" class="form-control my-2">
+
+                        <input type="submit" value="Add User" class="submit">
+                    </form>
+                </div>
+            </div>
+            <div class="card my-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Create Friendship</h5>
+
+                    <form action="/createfriendship" method="post" class=" d-flex flex-column ">
+
+                        <label for="user">User:
+
+                            <select name='user_id' class="my-1">
+                                {% for user in all_users %}
+                                <option value='{{user.id}}'>{{user.first_name}} {{user.last_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </label>
+
+                        <label for="friend" class="my-1">Friend:
+
+                            <select name='friend_id'>
+                                {% for user in all_users %}
+                                <option value='{{user.id}}'>{{user.first_name}} {{user.last_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </label>
+
+                        <input type="submit" value="Create" class="submit my-1">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+</body>
+
+</html>

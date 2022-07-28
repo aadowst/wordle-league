@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle League</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- <link rel="stylesheet" href="/flask_app/static/css/style.css"> -->
+
+</head>
+
+<body onload="compareScores(), flipCards()">
+    <div class="container">
+
+
+        <div class="nav">
+            <div class="nav-links">
+                <span>Welcome, {{session.first_name}}</span><span><a href="/oneleague/{{one_matchup.league_id}}/{{one_matchup.week}}">Return
+                        to League</a> <a href="/logout">Log Out</a></span>
+            </div>
+            <div class="header green">
+                <h1>Wordle League</h1>
+            </div>
+        </div>
+
+        <div class="body">
+            <div class="sidebar standings yellow">
+                <h3>Standings</h3>
+            </div>
+            <div class="main">
+                <div class="player-row row">
+                    <div class="players-left">Players </div>
+                    <div class="day-number">Day 1</div>
+                    <div class="day-number">Day 2</div>
+                    <div class="day-number">Day 3</div>
+                    <div class="day-number">Day 4</div>
+                    <div class="day-number">Day 5</div>
+                </div>
+
+                <form action="/submitscore" id="myForm" method="post">
+                    <div class="player-row row">
+                        <div class="left" id="player1">{{one_matchup.players[0].first_name}} </div>
+                        <input type="hidden" name="matchup_id" value="{{one_matchup.id}}">
+                        <input type="hidden" name="user_id" value="{{one_matchup.players[0].id}}">
+                        <input type="hidden" name="week" value="{{one_matchup.week}}">
+                        <div class="flip-card d000">
+                            <div class="flip-card-inner" id="d000">
+                                    <div class="flip-card-front">
+                                        <input type="text" name="" class="score day" value=" ">
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <input type="number" class="score day" id="p1d1" name="day1" value="{{player1_scores['day1']}}" oninput="form.submit()">
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="flip-card d100">
+                            <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <input type="text" name="" class="score day" value=" ">
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <input type="number" class="score day" id="p1d2" name="day2" value="{{player1_scores['day2']}}" oninput="form.submit()">
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="flip-card d200">
+                            <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <input type="text" name="" class="score day" value=" ">
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <input type="number" class="score day" id="p1d3" name="day3" value="{{player1_scores['day3']}}" oninput="form.submit()">
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div class="flip-card d300">
+                            <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <input type="text" name="" class="score day" value=" ">
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <input type="number" class="score day" id="p1d4" name="day4" value="{{player1_scores['day4']}}" oninput="form.submit()">
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div class="flip-card d400">
+                            <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <input type="text" name="" class="score day" value=" ">
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <input type="number" class="score day" id="p1d5" name="day5" value="{{player1_scores['day5']}}" oninput="form.submit()">
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+                <form action="/submitscore" id="myForm" method="post">
+                    <div class="player-row row">
+                        <div class="left" id="player2">{{one_matchup.players[1].first_name}}</div>
+                        <input type="hidden" name="matchup_id" value="{{one_matchup.id}}">
+                        <input type="hidden" name="user_id" value="{{one_matchup.players[1].id}}">
+                        <input type="hidden" name="week" value="{{one_matchup.week}}">
+
+                        <div class="flip-card d000">
+                            <div class="flip-card-inner" id="d000">
+                                    <div class="flip-card-front">
+                                        <input type="text" name="" class="score day" value=" ">
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <input type="number" class="score day" id="p2d1" name="day1" value="{{player2_scores['day1']}}" oninput="form.submit()">
+                                    </div>
+                            </div>
+                        </div>
+
+
+                        <div class="flip-card d100">
+                            <div class="flip-card-inner" id="d000">
+                                    <div class="flip-card-front">
+                                        <input type="text" name="" class="score day" value=" ">
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <input type="number" class="score day" id="p2d2" name="day2" value="{{player2_scores['day2']}}" oninput="form.submit()">
+                                    </div>
+                            </div>
+                        </div>
+
+
+                        <div class="flip-card d200">
+                            <div class="flip-card-inner" id="d000">
+                                    <div class="flip-card-front">
+                                        <input type="text" name="" class="score day" value=" ">
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <input type="number" class="score day" id="p2d3" name="day3" value="{{player2_scores['day3']}}" oninput="form.submit()">
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div class="flip-card d300">
+                            <div class="flip-card-inner" id="d000">
+                                    <div class="flip-card-front">
+                                        <input type="text" name="" class="score day" value=" ">
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <input type="number" class="score day" id="p2d4" name="day4" value="{{player2_scores['day4']}}" oninput="form.submit()">
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="flip-card d400">
+                            <div class="flip-card-inner" id="d000">
+                                    <div class="flip-card-front">
+                                        <input type="text" name="" class="score day" value=" ">
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <input type="number" class="score day" id="p2d5" name="day5" value="{{player2_scores['day5']}}" oninput="form.submit()">
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="sidebar box_score yellow">
+                <h2><u> Box Score</u></h2>
+                    <h2 id="user1-name">{{one_matchup.players[0].first_name}}:  </h2> <h2 class="user1-score" id="user1-score"></h2>
+                    <h2 id="user2-name">{{one_matchup.players[1].first_name}}:  </h2> <h2 class="user2-score" id="user2-score"></h2>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!-- <script src="/flask_app/static/js/script.js"></script> -->
+</body>
+
+</html>
