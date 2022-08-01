@@ -83,29 +83,29 @@ class League:
         else:
             return
         
-    # @classmethod
-    # def get_league_with_players(cls, data):
-    #     query = "SELECT * from leagues JOIN users_in_leagues on leagues.id = users_in_leagues.league_id join users on users_in_leagues.user_id = users.id WHERE leagues.id = %(id)s;"
-    #     results = connectToMySQL(DATABASE).query_db(query, data)
-
-    #     one_league= cls(results[0])
-
-    #     for row_from_db in results:
-    #         player = {
-    #             "id": row_from_db["users.id"],
-    #             "first_name": row_from_db["first_name"],
-    #             "last_name": row_from_db["last_name"],
-    #             "email": row_from_db["email"],
-    #             "password": row_from_db['password'],
-    #             "created_at": row_from_db['created_at'],
-    #             "updated_at": row_from_db['updated_at']
-    #         }
-    #         one_league.players.append(model_user.User(player))
-    #     return one_league
-
     @classmethod
     def get_league_with_players(cls, data):
         query = "SELECT * from leagues JOIN users_in_leagues on leagues.id = users_in_leagues.league_id join users on users_in_leagues.user_id = users.id WHERE leagues.id = %(id)s;"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+
+        one_league= cls(results[0])
+
+        for row_from_db in results:
+            player = {
+                "id": row_from_db["users.id"],
+                "first_name": row_from_db["first_name"],
+                "last_name": row_from_db["last_name"],
+                "email": row_from_db["email"],
+                "password": row_from_db['password'],
+                "created_at": row_from_db['created_at'],
+                "updated_at": row_from_db['updated_at']
+            }
+            one_league.players.append(model_user.User(player))
+        return one_league
+
+    @classmethod
+    def get_player_records(cls, data):
+        query = "SELECT * from users LEFT JOIN matchups users.id = matchups.user_id where matchups.league_id = %(id)s;"
         results = connectToMySQL(DATABASE).query_db(query, data)
 
         one_league= cls(results[0])
